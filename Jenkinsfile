@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    stages {
+        stage('Pull Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Jaafarkukhon/recommendation-app.git'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t recommendation-app /var/jenkins_home/workspace/recommendation-pipeline'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'docker stop rec-container || true'
+                sh 'docker rm rec-container || true'
+                sh 'docker run -d --name rec-container -p 5000:5000 recommendation-app'
+            }
+        }
+    }
+}
