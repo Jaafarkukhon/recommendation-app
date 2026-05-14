@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Recommendation System</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin-top: 80px; background: #f5f5f5; }
+    h1 { color: #333; }
+    input { padding: 10px; width: 250px; font-size: 16px; border: 2px solid #333; border-radius: 5px; }
+    button { padding: 10px 20px; font-size: 16px; background: #333; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    #result { margin-top: 30px; font-size: 24px; color: #0077cc; }
+  </style>
+</head>
+<body>
+  <h1>Recommendation System</h1>
+  <p>Type a word and get a recommendation!</p>
+  <form method="POST">
+    <input type="text" name="user_input" value="{{ user_input }}" placeholder="e.g. hot, cold, sweet...">
+    <button type="submit">Recommend</button>
+  </form>
+  {% if result %}
+    <div id="result">✅ Recommendation: {{ result }}</div>
+  {% elif not_found %}
+    <div id="result" style="color:red;">❌ No recommendation found!</div>
+  {% endif %}
+</body>
+</html>
