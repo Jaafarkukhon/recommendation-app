@@ -15,7 +15,12 @@ pipeline {
             steps {
                 sh 'docker stop rec-container || true'
                 sh 'docker rm rec-container || true'
-                sh 'docker run -d --name rec-container -p 5000:5000 recommendation-app'
+                sh 'docker run -d --name rec-container -p 5000:5000 -p 2222:22 recommendation-app'
+            }
+        }
+        stage('Start SSH') {
+            steps {
+                sh 'docker exec rec-container bash -c "mkdir -p /run/sshd && /usr/sbin/sshd"'
             }
         }
     }
