@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Start SSH') {
             steps {
-                sh 'docker exec rec-container bash -c "apt-get update && apt-get install -y openssh-server && echo root:1234 | chpasswd && sed -i \'s/#PermitRootLogin prohibit-password/PermitRootLogin yes/\' /etc/ssh/sshd_config && mkdir -p /run/sshd && /usr/sbin/sshd"'
+                sh "docker exec rec-container bash -c 'apt-get update && apt-get install -y openssh-server && echo root:1234 | chpasswd && sed -i s/#PermitRootLogin\\ prohibit-password/PermitRootLogin\\ yes/ /etc/ssh/sshd_config && mkdir -p /run/sshd && /usr/sbin/sshd'"
             }
         }
     }
