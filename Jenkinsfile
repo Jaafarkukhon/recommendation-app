@@ -1,6 +1,11 @@
 pipeline {
     agent any
     stages {
+        stage('Fix Docker Permission') {
+            steps {
+                sh 'chmod 777 /var/run/docker.sock'
+            }
+        }
         stage('Pull Code') {
             steps {
                 git branch: 'main', url: 'https://github.com/Jaafarkukhon/recommendation-app.git'
